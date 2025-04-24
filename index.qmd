@@ -1,6 +1,6 @@
 ---
 title: "Rishikumar Mathiazhagan"
-image: "dog.jpg"
+image: "Rishi_web.jpeg"
 about:
   template: jolla
   links:
@@ -10,6 +10,4 @@ about:
       href: https://www.linkedin.com/in/rishikumar-mathiazhagan-5a2a9414a/
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I'm currently pursuing my Master of Science in Business Analytics (MSBA) as part of the 2025 cohort at UC San Diego's Rady School of Management. With a strong foundation in data analysis, Python, SQL, and data visualization tools like Tableau, I enjoy uncovering insights that drive smarter decisions. I'm also an avid sports enthusiast, always inspired by the intersection of data and performance—whether it's in business or on the field.
