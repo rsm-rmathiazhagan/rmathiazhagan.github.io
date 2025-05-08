@@ -1,0 +1,99 @@
+---
+title: "Fitting GLM Regression"
+---
+```{r}
+library(readr)
+
+# Read the CSV file
+data <- read_csv("purchase.csv")
+
+# View the first few rows
+head(data)
+```
+
+```{r}
+# Load data
+data <- read.csv("purchase.csv")
+
+# Fit a GLM: replace 'response' and 'predictor' with actual column names
+model <- glm(purchase ~ idx, data = data, family = binomial(link = "logit"))
+
+# Summary of model
+summary(model)
+
+# Confidence interval for coefficients
+confint(model)
+```
+
+```{r}
+# Load data
+data <- read.csv("purchase.csv")
+x <- data$idx
+y <- data$purchase  # should be 0/1
+
+# Define the negative log-likelihood for logistic regression
+neg_log_likelihood_logit <- function(par, x, y) {
+  beta0 <- par[1]
+  beta1 <- par[2]
+  eta <- beta0 + beta1 * x
+  p <- 1 / (1 + exp(-eta))  # logistic link
+  -sum(y * log(p) + (1 - y) * log(1 - p))  # negative log-likelihood
+}
+
+# Initial values
+start_par <- c(0, 0)
+
+# Optimize
+fit <- optim(par = start_par,
+             fn = neg_log_likelihood_logit,
+             x = x, y = y,
+             hessian = TRUE,
+             method = "BFGS")
+
+# Extract estimates and SEs
+estimates <- fit$par
+hessian <- fit$hessian
+cov_matrix <- solve(hessian)
+se <- sqrt(diag(cov_matrix))
+
+# CI for slope (parameter 2)
+z <- qnorm(0.975)
+ci_slope <- c(
+  estimates[2] - z * se[2],
+  estimates[2] + z * se[2]
+)
+
+list(Estimate = estimates[2], SE = se[2], CI = ci_slope)
+```
+
+
+```{r}
+# Load data
+data <- read.csv("purchase.csv")
+x <- data$idx
+y <- data$purchase
+df <- data.frame(x = x, y = y)
+
+B <- 1000
+slope_estimates <- numeric(B)
+set.seed(123)
+
+for (i in 1:B) {
+  sample_indices <- sample(1:nrow(df), replace = TRUE)
+  sample_data <- df[sample_indices, ]
+  fit <- glm(y ~ x, data = sample_data, family = binomial(link = "logit"))
+  slope_estimates[i] <- coef(fit)["x"]
+}
+
+# 1. CI using standard deviation approach
+slope_mean <- mean(slope_estimates)
+slope_sd <- sd(slope_estimates)
+z <- qnorm(0.975)
+ci_sd <- c(slope_mean - z * slope_sd, slope_mean + z * slope_sd)
+
+# 2. CI using quantile approach
+ci_quantile <- quantile(slope_estimates, probs = c(0.025, 0.975))
+
+list(CI_SD = ci_sd, CI_Quantile = ci_quantile)
+```
+
