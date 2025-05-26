@@ -230,9 +230,6 @@ poisson_regression_loglikelihood <- function(beta, Y, X) {
 
 ```{r poisson-regression-setup, message=FALSE, warning=FALSE}
 # Create model matrix (design matrix) with intercept, age, age^2, region dummies, and iscustomer
-blueprinty_data <- blueprinty_data %>%
-  mutate(age_sq = age^2)
-
 X <- model.matrix(~ age + I(age^2) + region + iscustomer, data = blueprinty_data)
 Y <- blueprinty_data$patents
 ```
