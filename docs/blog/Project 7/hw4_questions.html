@@ -240,7 +240,9 @@ K-Means
 </div>
 </div>
 </div>
-<p>5 ### Manual Implementation of K-Means Algorithm</p>
+</section>
+<section id="manual-implementation-of-k-means-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="manual-implementation-of-k-means-algorithm">Manual Implementation of K-Means Algorithm</h3>
 <p>The kmeans_manual function implements the K-Means clustering algorithm from scratch in R. It begins by randomly selecting k initial centroids from the dataset. For each iteration, the algorithm calculates the Euclidean distance from every data point to each centroid, assigns each point to the nearest centroid, and then updates centroids by computing the mean of all points assigned to each cluster. The loop continues until the centroids stabilize or a maximum number of iterations is reached. This implementation includes safeguards, such as retaining the previous centroid if a cluster becomes empty. The output includes final cluster assignments and centroid coordinates, which are then used to label the data for visualization. This approach mirrors the internal logic of R’s kmeans() function and offers valuable insight into how unsupervised learning algorithms operate step-by-step.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>kmeans_manual <span class="ot">&lt;-</span> <span class="cf">function</span>(data, <span class="at">k =</span> <span class="dv">3</span>, <span class="at">max_iter =</span> <span class="dv">10</span>) {</span>
@@ -495,11 +497,11 @@ K Nearest Neighbors
 </div>
 </div>
 </div>
-</section>
-<section id="explanation-of-train-vs-test" class="level3">
-<h3 class="anchored" data-anchor-id="explanation-of-train-vs-test">Explanation of train vs test</h3>
+<section id="explanation-of-train-vs-test" class="level4">
+<h4 class="anchored" data-anchor-id="explanation-of-train-vs-test">Explanation of train vs test</h4>
 <p>The first plot shows the training data for the K-Nearest Neighbors (KNN) model. Each point is colored based on its class label: class 0 in pink and class 1 in blue. The black dashed line represents the true decision boundary that separates the two classes. The points are spread around this wavy boundary, making the classification task more challenging, especially where the two classes are close together.</p>
 <p>The second plot shows a separate test dataset generated in the same way as the training data. Like the training set, the test data also has a mix of class 0 and class 1 points around the same true boundary. This test set will be used to check how accurately the KNN model can predict the class of new, unseen points, especially around the complex boundary region. The similarity in pattern between the two datasets suggests that the test set is a good match for evaluating the model fairly.</p>
+</section>
 </section>
 <section id="custom-knn-implementation-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="custom-knn-implementation-in-r">Custom KNN Implementation in R</h3>
